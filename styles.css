@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eğitim Sınav Simülatörü</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f7f7f7; }
+    header { background: linear-gradient(to right, #4e54c8, #8f94fb); color: white; padding: 20px; text-align: center; }
+    header h1 { margin: 0; }
+    header p { margin: 5px 0 15px; }
+    button { padding: 10px 20px; background: #ff9800; border: none; border-radius: 5px; color: white; cursor: pointer; font-size: 16px; }
+    button:hover { background: #e68900; }
+    .container { padding: 20px; display: none; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 20px; }
+    .card { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer; }
+    .card:hover { background: #f1f1f1; }
+    .lesson-content { display: none; }
+    img { max-width: 100%; border-radius: 10px; margin-top: 10px; }
+    iframe { width: 100%; height: 200px; margin-top: 10px; border-radius: 10px; }
+    .test-question { margin: 15px 0; padding: 10px; background: #fff; border-radius: 8px; }
+    .result { font-weight: bold; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Sınav Stresini Yen, Zirveye Ulaş</h1>
+    <p>Oyunlaştırılmış, kişiselleştirilmiş öğrenme deneyimi</p>
+    <button onclick="showLessons()">Hemen Başla</button>
+</header>
+
+<!-- Dersler -->
+<div class="container" id="lessons">
+    <h2>Dersler</h2>
+    <div class="cards">
+        <div class="card" onclick="openLesson('mat')">📐 Matematik</div>
+        <div class="card" onclick="openLesson('fiz')">🔬 Fizik</div>
+        <div class="card" onclick="openLesson('kim')">⚗️ Kimya</div>
+        <div class="card" onclick="openLesson('bio')">🧬 Biyoloji</div>
+        <div class="card" onclick="openLesson('tur')">📖 Türkçe</div>
+        <div class="card" onclick="openLesson('tar')">🏛️ Tarih</div>
+        <div class="card" onclick="openLesson('cog')">🌍 Coğrafya</div>
+    </div>
+</div>
+
+<!-- Ders Detayları -->
+<div class="container lesson-content" id="mat">
+    <h2>Matematik - Fonksiyonlar</h2>
+    <p>Fonksiyonlar, her x değerine yalnızca bir y değeri atanması kuralına dayanan özel bağıntılardır.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Function_machine2.svg/640px-Function_machine2.svg.png" alt="Fonksiyonlar">
+    <iframe src="https://www.youtube.com/embed/NkF74H8_wMo" allowfullscreen></iframe>
+    <h3>Test</h3>
+    <div class="test-question">
+        1) f(x) = 2x + 3 fonksiyonunda f(2) kaçtır?
+        <input type="number" id="q1">
+    </div>
+    <div class="test-question">
+        2) f(x) = x², f(3) kaçtır?
+        <input type="number" id="q2">
+    </div>
+    <button onclick="checkTest()">Testi Kontrol Et</button>
+    <div class="result" id="result"></div>
+</div>
+
+<!-- Diğer dersler için boş şablon -->
+<div class="container lesson-content" id="fiz">
+    <h2>Fizik - Newton'un Hareket Yasaları</h2>
+    <p>Newton, hareketi açıklamak için üç temel yasa geliştirmiştir...</p>
+</div>
+<div class="container lesson-content" id="kim">
+    <h2>Kimya - Periyodik Tablo</h2>
+    <p>Elementlerin özelliklerine göre dizildiği tabloya periyodik tablo denir...</p>
+</div>
+<div class="container lesson-content" id="bio">
+    <h2>Biyoloji - Hücre</h2>
+    <p>Hücre, canlıların en küçük yapı taşıdır...</p>
+</div>
+<div class="container lesson-content" id="tur">
+    <h2>Türkçe - Cümle Türleri</h2>
+    <p>Cümleler yüklemlerine, anlamına ve yapısına göre ayrılır...</p>
+</div>
+<div class="container lesson-content" id="tar">
+    <h2>Tarih - Kurtuluş Savaşı</h2>
+    <p>Kurtuluş Savaşı, 1919-1923 yılları arasında Türk milletinin bağımsızlık mücadelesidir...</p>
+</div>
+<div class="container lesson-content" id="cog">
+    <h2>Coğrafya - İklim Tipleri</h2>
+    <p>Dünyada farklı iklim tipleri vardır...</p>
+</div>
+
+<script>
+function showLessons() {
+    document.getElementById('lessons').style.display = 'block';
+    document.querySelector('header').style.display = 'none';
+}
+function openLesson(id) {
+    document.querySelectorAll('.lesson-content').forEach(el => el.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    document.getElementById('lessons').style.display = 'none';
+}
+function checkTest() {
+    let score = 0;
+    if (document.getElementById('q1').value == 7) score++;
+    if (document.getElementById('q2').value == 9) score++;
+    document.getElementById('result').innerText = `Doğru Sayınız: ${score}/2`;
+}
+</script>
+
+</body>
+</html>

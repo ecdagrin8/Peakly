@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Doping Hafıza - Lise Eğitim Platformu</title>
+<style>
+  :root {
+    --mor1: #9d4edd;
+    --mor2: #f72585;
+    --text-light: #f0e7ff;
+    --card-bg: #720026;
+    --accent1: #ff48c4;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; padding:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, var(--mor1), var(--mor2));
+    color: var(--text-light);
+    min-height: 100vh;
+  }
+  header {
+    background: rgba(0,0,0,0.15);
+    padding: 15px;
+    text-align: center;
+  }
+  header button {
+    background: transparent;
+    border: 2px solid var(--text-light);
+    color: var(--text-light);
+    margin: 0 8px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  header button.active, header button:hover {
+    background: var(--text-light);
+    color: var(--mor1);
+  }
+  main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 15px 40px;
+  }
+  section { display: none; }
+  section.active { display: block; }
+
+  /* Dersler Kartlar */
+  #dersler .ders-kart {
+    background: var(--card-bg);
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  #dersler .ders-kart:hover {
+    background: var(--accent1);
+    color: #1a0000;
+  }
+  #dersler .ders-kart h3 {
+    margin: 0;
+  }
+
+  /* Konu Detay */
+  #konu-detay {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 15px;
+  }
+  #konu-detay h2 {
+    margin-top: 0;
+    color: var(--accent1);
+  }
+  .tab-buttons {
+    margin: 20px 0;
+    text-align: center;
+  }
+  .tab-buttons button {
+    background: transparent;
+    border: 2px solid var(--text-light);
+    color: var(--text-light);
+    padding: 8px 16px;
+    margin: 0 6px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .tab-buttons button.active, .tab-buttons button:hover {
+    background: var(--text-light);
+    color: var(--mor1);
+  }
+  .tab-content {
+    display: none;
+    padding: 10px;
+    background: rgba(255 255 255 / 0.1);
+    border-radius: 12px;
+  }
+  .tab-content.active {
+    display: block;
+  }
+  #geri-btn {
+    margin-top: 20px;
+    background: var(--accent1);
+    border: none;
+    color: #1a0000;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <button class="menu-btn active" data-target="dersler">Dersler</button>
+  <button class="menu-btn" data-target="videolar">Videolar</button>
+  <button class="menu-btn" data-target="cizelgeler">Çizelgeler</button>
+  <button class="menu-btn" data-target="denemeler">Denemeler</button>
+  <button class="menu-btn" data-target="kocluk">Koçluk & Rehberlik</button>
+</header>
+
+<main>
+
+  <!-- Dersler Bölümü -->
+  <section id="dersler" class="active">
+    <h1>Lise Dersleri</h1>
+    <div class="ders-kart" data-ders="matematik"><h3>Matematik</h3><p>Konu özetleri, testler ve oyunlar</p></div>
+    <div class="ders-kart" data-ders="fizik"><h3>Fizik</h3><p>Konu özetleri, testler ve oyunlar</p></div>
+    <div class="ders-kart" data-ders="kimya"><h3>Kimya</h3><p>Konu özetleri, testler ve oyunlar</p></div>
+  </section>
+
+  <!-- Konu Detay Bölümü -->
+  <section id="konu-detay">
+    <h2 id="ders-baslik"></h2>
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="ozet">Konu Özeti</button>
+      <button class="tab-btn" data-tab="oyun">Hafıza Oyunu</button>
+      <button class="tab-btn" data-tab="test">Test</button>
+    </div>
+    <div id="ozet" class="tab-content active"></div>
+    <div id="oyun" class="tab-content">
+      <p>Burada hafıza kartları oyunu olacak.</p>
+    </div>
+    <div id="test" class="tab-content">
+      <p>Burada test soruları olacak.</p>
+    </div>
+    <button id="geri-btn">Geri</button>
+  </section>
+
+  <!-- Videolar -->
+  <section id="videolar">
+    <h1>Videolar</h1>
+    <p>Burada koçluk, rehberlik ve eğitim videoları olacak.</p>
+  </section>
+
+  <!-- Çizelgeler -->
+  <section id="cizelgeler">
+    <h1>Çizelgeler</h1>
+    <p>Günlük ve haftalık çalışma çizelgeleri burada olacak.</p>
+  </section>
+
+  <!-- Denemeler -->
+  <section id="denemeler">
+    <h1>Denemeler</h1>
+    <p>Deneme testleri ve ölçme değerlendirme burada olacak.</p>
+  </section>
+
+  <!-- Koçluk & Rehberlik -->
+  <section id="kocluk">
+    <h1>Koçluk & Rehberlik</h1>
+    <p>Koçluk ve rehberlik içerikleri burada olacak.</p>
+  </section>
+
+</main>
+
+<script>
+  // Menü butonları kontrolü
+  const menuBtns = document.querySelectorAll('.menu-btn');
+  const sections = document.querySelectorAll('main section');
+
+  menuBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Tüm aktifleri kaldır
+      menuBtns.forEach(b => b.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+      // Tıklanan aktif
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.target).classList.add('active');
+      // Ders detay kapalı olsun
+      document.getElementById('konu-detay').style.display = 'none';
+      // Dersler listesi göster
+      if(btn.dataset.target === 'dersler') {
+        document.getElementById('dersler').style.display = 'block';
+      }
+    });
+  });
+
+  // Ders kartlarına tıklayınca konu detay aç
+  const dersKartlari = document.querySelectorAll('#dersler .ders-kart');
+  const konuDetay = document.getElementById('konu-detay');
+  const dersBaslik = document.getElementById('ders-baslik');
+  const ozet = document.getElementById('ozet');
+  const oyun = document.getElementById('oyun');
+  const test = document.getElementById('test');
+
+  dersKartlari.forEach(kart => {
+    kart.addEventListener('click', () => {
+      // Ders adı
+      const dersAdi = kart.dataset.ders;
+      dersBaslik.textContent = kart.querySelector('h3').textContent;
+      // Ders listesi gizle, detay göster
+      document.getElementById('dersler').style.display = 'none';
+      konuDetay.style.display = 'block';
+
+      // İçerikleri ders adına göre koy (basit örnek)
+      if(dersAdi === 'matematik') {
+        ozet.innerHTML = '<h3>Matematik Konu Özeti</h3><p>Fonksiyonlar, limitler, türev, integral ve daha fazlası...</p>';
+        oyun.innerHTML = '<p>Matematik hafıza kartları oyunu: Fonksiyon sembolleri ve tanımları eşleştir.</p>';
+        test.innerHTML = `
+          <p><strong>Soru 1:</strong> 2x+3=7 ise x kaçtır?</p>
+          <button onclick="alert('Doğru!')">2</button>
+          <button onclick="alert('Yanlış!')">3</button>
+          <button onclick="alert('Yanlış!')">4</button>
+        `;
+      } else if(dersAdi === 'fizik') {
+        ozet.innerHTML = '<h3>Fizik Konu Özeti</h3><p>Newton hareket kanunları, enerji, kuvvet, elektrik ve manyetizma...</p>';
+        oyun.innerHTML = '<p>Fizik kavramları hafıza kartları oyunu.</p>';
+        test.innerHTML = `
+          <p><strong>Soru 1:</strong> Kuvvetin birimi nedir?</p>
+          <button onclick="alert('Doğru!')">Newton (N)</button>
+          <button onclick="alert('Yanlış!')">Joule (J)</button>
+          <button onclick="alert('Yanlış!')">Watt (W)</button>
+        `;
+      } else if(dersAdi === 'kimya') {
+        ozet.innerHTML = '<h3>Kimya Konu Özeti</h3><p>Atom yapısı, periyodik tablo, kimyasal bağlar...</p>';
+        oyun.innerHTML = '<p>Kimya sembolleri ve elementler hafıza kartları oyunu.</p>';
+        test.innerHTML = `
+          <p><strong>Soru 1:</strong> H2O molekülü neyi ifade eder?</p>
+          <button onclick="alert('Doğru!')">Su</button>
+          <button onclick="alert('Yanlış!')">Hidrojen Peroksit</button>
+          <button onclick="alert('Yanlış!')">Oksijen</button>
+        `;
+      }
+      // Sekmelerde ilk aktif "Konu Özeti" olsun
+      setActiveTab('ozet');
+    });
+  });
+
+  // Tab butonları konu detayda
+  const tabBtns = document.querySelectorAll('.tab-buttons button');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      setActiveTab(btn.dataset.tab);
+    });
+  });
+
+  function setActiveTab(tabId) {
+    [ozet, oyun, test].forEach(div => div.classList.remove('active'));
+    if(tabId === 'ozet') ozet.classList.add('active');
+    else if(tabId === 'oyun') oyun.classList.add('active');
+    else if(tabId === 'test') test.classList.add('active');
+  }
+
+  // Geri butonu - konu detaydan ders listesine dön
+  document.getElementById('geri-btn').addEventListener('click', () => {
+    konuDetay.style.display = 'none';
+    document.getElementById('dersler').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
